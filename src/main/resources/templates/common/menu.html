@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+    <nav class="top-nav" th:fragment="main-header">
+        <div class="nav-left">
+            <a th:href="@{/main}" class="logo-link">
+                <img th:src="@{/images/miniLogoBlack.png}" alt="Scriptorium Logo" class="logo-img">
+            </a>
+            <a th:href="@{/main}" class="nav-link main-link">Main</a>
+            <a th:href="@{/createBook}" class="nav-link">Create book</a>
+            <a th:href="@{/my-profile}" class="nav-link">Profile</a>
+        </div>
+        <form th:action="@{/logout}" method="post" style="margin: 0;">
+            <button type="submit" class="logout-btn">Exit</button>
+        </form>
+    </nav>
+</body>
+</html>

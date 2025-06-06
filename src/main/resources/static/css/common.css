@@ -1,0 +1,126 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #f0ba5c;
+    --primary-hover: #d6a247;
+    --text-color: #333;
+    --shadow-color: rgba(34, 16, 2, 0.1);
+    --white-bg: rgba(255, 255, 255, 0.9);
+}
+
+body {
+    background: linear-gradient(135deg, #faf9f5 0%, #e2d7c3 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    font-size: 16px;
+    color: var(--text-color);
+}
+
+/* Общие стили для контейнеров */
+.container-white {
+    background: var(--white-bg);
+    border-radius: 15px;
+    box-shadow: 0 0 20px var(--shadow-color);
+    padding: clamp(1.5rem, 5vw, 3rem);
+    width: 100%;
+    margin: 6rem auto 2rem;
+}
+
+/* Общие стили для кнопок */
+.btn {
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+    padding: clamp(0.75rem, 2vw, 1rem);
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+}
+
+/* Общие стили для форм */
+.form-control {
+    border-radius: 10px;
+    font-size: clamp(0.875rem, 2vw, 1rem);
+    padding: clamp(0.5rem, 2vw, 0.75rem);
+}
+
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.25rem rgba(240, 186, 92, 0.25);
+    outline: 0;
+}
+
+.form-label {
+    font-size: clamp(0.875rem, 2vw, 1rem);
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+/* Общие стили для текста */
+.text-center {
+    text-align: center;
+}
+
+.text-danger {
+    font-size: clamp(0.75rem, 1.5vw, 0.875rem);
+    margin-top: 0.5rem;
+    color: #dc3545;
+}
+
+/* Общие стили для ссылок */
+.custom-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.custom-link:hover {
+    color: var(--primary-hover);
+}
+
+/* Стили для автозаполнения */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
+    -webkit-text-fill-color: var(--text-color) !important;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+/* Медиа запросы */
+@media (max-width: 768px) {
+    body {
+        padding: 0.5rem;
+    }
+
+    .container-white {
+        margin: 5rem 1rem 2rem;
+        padding: 1.5rem;
+    }
+}
+
+/* Общие стили для заголовков */
+.welcome-header {
+    color: var(--text-color);
+    margin-bottom: 2rem;
+    text-align: center;
+    font-size: clamp(1.5rem, 4vw, 2rem);
+} 

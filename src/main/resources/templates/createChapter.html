@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create New Chapter - Scriptorium</title>
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/common.css}">
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+    <link rel="stylesheet" th:href="@{/css/chapter.css}">
+</head>
+<body>
+    <div th:replace="~{common/menu :: main-header}"></div>
+
+    <div class="create-chapter-page">
+        <div class="create-chapter-form">
+            <div class="form-header">
+                <h1 th:text="'Create Chapter for ' + ${book.name}"></h1>
+            </div>
+
+            <form th:action="@{'/createChapter/' + ${book.id}}" method="post" id="chapterForm" th:object="${chapter}">
+                <div class="form-group">
+                    <label class="form-label">Chapter Title</label>
+                    <input type="text" name="description" th:field="*{title}" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Content</label>
+                    <div id="quillEditor" class="quill-editor"></div>
+                    <input type="hidden" th:field="*{description}" id="description">
+                </div>
+
+                <button type="submit" class="submit-btn">Create Chapter</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', function () {
+            const quill = new Quill('#quillEditor', {
+                theme: 'snow',
+                modules: {
+                    toolbar: [
+                        [{ 'header': [1, 2, 3, false] }],
+                        ['bold', 'italic', 'underline', 'strike'],
+                        [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+                        [{ 'align': [] }],
+                        ['link', 'image'],
+                        ['clean']
+                    ]
+                }
+            });
+
+            const form = document.getElementById('chapterForm');
+            if (form) {
+                form.onsubmit = function () {
+                    const html = quill.root.innerHTML;
+                    console.log("📤 Sending description:", html);
+                    document.querySelector('#description').value = html;
+                    return true;
+                };
+            } else {
+                console.warn("⚠️ Form is not found!");
+            }
+        });
+    </script>
+
+    </script>
+</body>
+</html>

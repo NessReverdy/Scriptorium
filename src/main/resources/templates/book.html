@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${book.name}">Book Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/common.css}">
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+</head>
+<body>
+    <div th:replace="~{common/menu :: main-header}"></div>
+
+    <div class="container-white book-details">
+        <div class="book-layout">
+            <div class="chapters-sidebar">
+                <h2 class="section-title">Chapters</h2>
+                <div th:if="${#lists.isEmpty(chapters)}" class="no-chapters">
+                    <p>This book has no chapters yet.</p>
+                </div>
+                <ul th:if="${!#lists.isEmpty(chapters)}" class="chapters-list">
+                    <li th:each="chapter : ${chapters}" class="chapter-item">
+                        <div class="chapter-content">
+                            <a th:href="@{'/chapter/' + ${chapter.id}}" th:text="${chapter.title}">Chapter title</a>
+                            <form th:if="${isOwner}" 
+                                  th:action="@{'/chapter/delete/' + ${chapter.id}}" 
+                                  method="post" 
+                                  class="delete-chapter-form">
+                                <button type="submit" class="delete-book-btn" title="Delete chapter">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="delete-icon">
+                                        <path d="M3 6h18"></path>
+                                        <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
+                                        <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
+                                    </svg>
+                                </button>
+                            </form>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="book-content">
+                <div class="book-header">
+                    <div class="book-cover-large">
+                        <img th:src="${cover}" alt="book cover">
+                    </div>
+                    <div class="book-header-info">
+                        <div class="book-main-info">
+                            <h1 class="book-title-large" th:text="${book.name}"></h1>
+                            <a th:href="@{'/profile-info/' + ${author.getId()}}" class="author-link">
+                                <img th:src="${avatar}" alt="user avatar" class="author-avatar">
+                                <span class="author-name" th:text="${author.firstName} + ' ' + ${author.lastName}"></span>
+                            </a>
+                        </div>
+                        <div class="book-description">
+                            <h2 class="section-title">About book</h2>
+                            <p class="description-text" th:text="${book.description}"></p>
+                        </div>
+                        <div th:if="${isOwner}" class="book-actions">
+                            <a th:href="@{'/createChapter/' + ${book.id}}" class="action-btn">
+                                <span>➕</span> Add Chapter
+                            </a>
+                            <a th:href="@{'/book/edit/' + ${book.id}}" class="action-btn">
+                                <span>✏️</span> Edit Book
+                            </a>
+                            <form th:action="@{'/book/delete/' + ${book.id}}" method="post" style="display: inline;">
+                                <button type="submit" class="action-btn delete-action">
+                                    <span>🗑️</span> Delete Book
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

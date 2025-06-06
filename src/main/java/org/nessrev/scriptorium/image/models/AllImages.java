@@ -1,12 +1,14 @@
 package org.nessrev.scriptorium.image.models;
 
 import jakarta.persistence.*;
-import org.nessrev.scriptorium.book.models.Book;
-import org.nessrev.scriptorium.user.models.User;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
-@Table(name = "books-covers")
-public class BookCover {
+@Table(name = "imagesTb")
+@Getter
+@Setter
+public class AllImages {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -14,9 +16,6 @@ public class BookCover {
     private String originalFileName;
     private Long size;
     private String contentType;
-    @Lob
+    @Column(columnDefinition = "bytea")
     private byte[] bytes;
-
-    @OneToOne(mappedBy = "cover")
-    private Book book;
 }
