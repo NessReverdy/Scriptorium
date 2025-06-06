@@ -6,6 +6,7 @@ import org.nessrev.scriptorium.book.models.Book;
 import org.nessrev.scriptorium.book.services.BookService;
 import org.nessrev.scriptorium.chapter.models.Chapter;
 import org.nessrev.scriptorium.chapter.services.ChapterService;
+import org.nessrev.scriptorium.image.interfaces.ImagesRepository;
 import org.nessrev.scriptorium.user.models.User;
 import org.nessrev.scriptorium.user.services.UserHelperService;
 import org.nessrev.scriptorium.user.services.UserService;
@@ -25,6 +26,7 @@ public class BookController {
     private final UserHelperService userHelper;
     private final UserService userService;
     private final ChapterService chapterService;
+    private final ImagesRepository imagesRepository;
 
     @GetMapping("/createBook")
     public String createBook(Model model) {
@@ -81,4 +83,15 @@ public class BookController {
         return "redirect:/my-profile";
     }
 
+    @PostMapping("/book/edit/{id}")
+    public String updateBookFromForm(@PathVariable Long id,
+                                     @RequestParam(required = false) String name,
+                                     @RequestParam(required = false) String description,
+                                     @RequestParam(required = false) MultipartFile coverFile) {
+        Book existingBook = bookService.getBookById(id);
+        if (!bookService.editBook(existingBook,name, description, coverFile)){
+            throw new RuntimeException("Couldn't to edit the book");
+        }
+        return "redirect:/book/" + id;
+    }
 }

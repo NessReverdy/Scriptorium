@@ -18,7 +18,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.nio.file.AccessDeniedException;
 import java.security.Principal;
 import java.util.Collections;
 import java.util.List;
@@ -70,5 +69,23 @@ public class BookService {
 
     public BookInfoDto saveBook (Book book){
         return BookMapper.toBookDto(book);
+    }
+
+    public boolean editBook(Book book,
+                            String name,
+                            String description,
+                            @RequestParam("cover") MultipartFile coverFile){
+        if (name != null && !name.trim().isEmpty()) {
+            book.setName(name);
+        }
+        if (description != null && !description.trim().isEmpty()) {
+            book.setDescription(description);
+        }
+        if (coverFile != null && !coverFile.isEmpty()) {
+            ImageInfoDto coverInfo = imageService.save(coverFile);
+            book.setCoverId(coverInfo.getId());
+        }
+        bookRepository.save(book);
+        return true;
     }
 }
