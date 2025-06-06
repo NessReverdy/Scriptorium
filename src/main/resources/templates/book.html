@@ -21,12 +21,13 @@
                 </div>
                 <ul th:if="${!#lists.isEmpty(chapters)}" class="chapters-list">
                     <li th:each="chapter : ${chapters}" class="chapter-item">
-                        <div class="chapter-content">
-                            <a th:href="@{'/chapter/' + ${chapter.id}}" th:text="${chapter.title}">Chapter title</a>
+                        <a th:href="@{'/chapter/' + ${chapter.id}}" class="chapter-content">
+                            <span class="chapter-title" th:text="${chapter.title}">Chapter title</span>
                             <form th:if="${isOwner}" 
                                   th:action="@{'/chapter/delete/' + ${chapter.id}}" 
                                   method="post" 
-                                  class="delete-chapter-form">
+                                  class="delete-chapter-form"
+                                  onclick="event.stopPropagation();">
                                 <button type="submit" class="delete-book-btn" title="Delete chapter">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="delete-icon">
                                         <path d="M3 6h18"></path>
@@ -35,7 +36,7 @@
                                     </svg>
                                 </button>
                             </form>
-                        </div>
+                        </a>
                     </li>
                 </ul>
             </div>

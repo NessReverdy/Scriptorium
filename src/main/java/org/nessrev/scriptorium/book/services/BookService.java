@@ -82,6 +82,7 @@ public class BookService {
             book.setDescription(description);
         }
         if (coverFile != null && !coverFile.isEmpty()) {
+            imagesRepository.deleteById(book.getCoverId());
             ImageInfoDto coverInfo = imageService.save(coverFile);
             book.setCoverId(coverInfo.getId());
         }
