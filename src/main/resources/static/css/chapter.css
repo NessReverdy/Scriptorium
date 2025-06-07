@@ -1,0 +1,336 @@
+.chapter-page {
+    width: 800px;
+    margin: 5rem auto 2rem;
+    padding: 0 2rem;
+}
+
+.chapter-container {
+    background: var(--white-bg);
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 2px 8px var(--shadow-color);
+}
+
+.chapter-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--bg-secondary);
+}
+
+.chapter-title {
+    font-size: 2rem;
+    color: var(--text-color);
+    margin: 0;
+}
+
+.chapter-text-content {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--text-color);
+    max-width: 100%;
+    display: block;
+    user-select: text;
+}
+
+.chapter-text-content *,
+.chapter-text-content *:hover {
+    background: transparent !important;
+}
+
+/* Стили для контента из редактора Quill */
+.chapter-text-content h1 {
+    font-size: 2em;
+    margin: 1em 0 0.5em;
+    color: var(--text-color);
+}
+
+.chapter-text-content h2 {
+    font-size: 1.5em;
+    margin: 1em 0 0.5em;
+    color: var(--text-color);
+}
+
+.chapter-text-content h3 {
+    font-size: 1.17em;
+    margin: 1em 0 0.5em;
+    color: var(--text-color);
+}
+
+.chapter-text-content p {
+    margin: 0 0 1em;
+    line-height: 1.8;
+}
+
+.chapter-text-content ul, 
+.chapter-text-content ol {
+    margin: 1em 0;
+    padding-left: 2em;
+}
+
+.chapter-text-content li {
+    margin-bottom: 0.5em;
+}
+
+.chapter-text-content a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.chapter-text-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 1em 0;
+}
+
+.chapter-text-content blockquote {
+    border-left: 4px solid var(--primary-color);
+    margin: 1em 0;
+    padding: 0.5em 0 0.5em 1em;
+    background: rgba(240, 186, 92, 0.1);
+    border-radius: 4px;
+}
+
+.chapter-text-content pre {
+    background: var(--bg-secondary);
+    padding: 1em;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 1em 0;
+}
+
+.chapter-text-content code {
+    font-family: monospace;
+    background: var(--bg-secondary);
+    padding: 0.2em 0.4em;
+    border-radius: 4px;
+}
+
+.chapter-text-content .ql-align-center {
+    text-align: center;
+}
+
+.chapter-text-content .ql-align-right {
+    text-align: right;
+}
+
+.chapter-text-content .ql-align-justify {
+    text-align: justify;
+}
+
+.chapter-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 2px solid var(--bg-secondary);
+}
+
+/* Create Chapter Page Styles */
+.create-chapter-page {
+    width: 800px;
+    margin: 5rem auto 2rem;
+    padding: 0 2rem;
+}
+
+.create-chapter-form {
+    background: var(--white-bg);
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 2px 8px var(--shadow-color);
+}
+
+.form-header {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.form-header h1 {
+    font-size: 2rem;
+    color: var(--text-color);
+    margin: 0;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-label {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-color);
+    margin-bottom: 0.8rem;
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    border: 2px solid #E0E0E0;
+    border-radius: 8px;
+    background-color: #F5F5F5;
+    color: var(--text-color);
+    transition: all 0.3s ease;
+}
+
+.form-control:hover {
+    background-color: #EEEEEE;
+    border-color: #D0D0D0;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    background-color: #FFFFFF;
+    box-shadow: 0 0 0 3px rgba(240, 186, 92, 0.2);
+}
+
+.quill-editor {
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #F5F5F5;
+    border: 2px solid #E0E0E0;
+}
+
+.ql-toolbar {
+    border: none !important;
+    border-bottom: 2px solid #E0E0E0 !important;
+    background-color: #FFFFFF;
+}
+
+.ql-container {
+    font-size: 1.1rem;
+    height: 400px !important;
+    border: none !important;
+    background-color: #F5F5F5;
+}
+
+.ql-editor {
+    padding: 1rem;
+}
+
+.submit-btn {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: white;
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.submit-btn:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.submit-btn:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+    .create-chapter-page {
+        width: 100%;
+        max-width: 800px;
+        margin: 4.5rem auto 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .create-chapter-page {
+        padding: 0 1.5rem;
+        margin: 4rem auto 2rem;
+    }
+
+    .create-chapter-form {
+        padding: 1.5rem;
+    }
+
+    .form-header h1 {
+        font-size: 1.8rem;
+    }
+
+    .ql-container {
+        height: 350px !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .create-chapter-page {
+        padding: 0 1rem;
+        margin: 3.5rem auto 2rem;
+    }
+
+    .create-chapter-form {
+        padding: 1rem;
+    }
+
+    .form-header h1 {
+        font-size: 1.5rem;
+    }
+
+    .form-label {
+        font-size: 1rem;
+    }
+
+    .ql-container {
+        height: 300px !important;
+    }
+
+    .submit-btn {
+        padding: 0.875rem;
+        font-size: 1rem;
+    }
+}
+
+/* Chapter View Responsive Styles */
+@media (max-width: 992px) {
+    .chapter-page {
+        width: 100%;
+        max-width: 800px;
+    }
+}
+
+@media (max-width: 768px) {
+    .chapter-page {
+        padding: 0 1.5rem;
+        margin: 4rem auto 2rem;
+    }
+
+    .chapter-container {
+        padding: 1.5rem;
+    }
+
+    .chapter-title {
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .chapter-page {
+        padding: 0 1rem;
+        margin: 3.5rem auto 2rem;
+    }
+
+    .chapter-container {
+        padding: 1rem;
+    }
+
+    .chapter-title {
+        font-size: 1.5rem;
+    }
+
+    .chapter-text-content {
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+} 

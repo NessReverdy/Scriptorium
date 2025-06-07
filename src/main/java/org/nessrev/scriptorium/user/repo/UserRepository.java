@@ -1,4 +1,4 @@
-package org.nessrev.scriptorium.user.interfaces;
+package org.nessrev.scriptorium.user.repo;
 
 import org.nessrev.scriptorium.user.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;

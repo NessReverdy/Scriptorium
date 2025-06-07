@@ -1,14 +1,10 @@
 package org.nessrev.scriptorium.user.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
-import org.nessrev.scriptorium.book.models.Book;
-import org.nessrev.scriptorium.user.enums.UserRoles;
-
-import java.util.HashSet;
-import java.util.Set;
 
 
 @Getter
@@ -40,10 +36,8 @@ public class User {
     private String description;
 
     private boolean isActive;
-
-    @ElementCollection(targetClass = UserRoles.class, fetch = FetchType.EAGER)
-    @Enumerated(EnumType.STRING)
-    private Set<UserRoles> roles = new HashSet<>();
+    @NotNull(message = "Select your role: Writer or Reader")
+    private Boolean isWriter;
 
     @Column(name = "avatar_id")
     private Long avatarId;

@@ -20,8 +20,8 @@
                 <img th:src="${avatarPath}" alt="User avatar" class="profile-avatar" />
             </div>
                     <div class="profile-header-info">
-            <h1 class="profile-name" th:text="${user.firstName} +' '+ ${user.lastName}"></h1>
-                        <div class="profile-role" th:text="${user.roles}"></div>
+                         <h1 class="profile-name" th:text="${user.firstName} +' '+ ${user.lastName}"></h1>
+                        <div class="profile-role" th:text="${user.isWriter} ? 'writer' : 'reader'"></div>
                     </div>
         </div>
 

@@ -47,6 +47,21 @@
                         <label class="form-label">Add your avatar:</label>
                         <input type="file" class="form-control" name="avatarFile" accept="image/*">
                     </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Your role:</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" th:field="*{isWriter}" th:value="true" id="publicBook">
+                            <label class="form-check-label" for="publicBook">Writer</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" th:field="*{isWriter}" th:value="false" id="privateBook">
+                            <label class="form-check-label" for="privateBook">Reader</label>
+                        </div>
+
+                        <div class="text-danger" th:if="${#fields.hasErrors('isWriter')}"
+                             th:errors="*{isWriter}">Error</div>
+                    </div>
                 </div>
             </div>
 

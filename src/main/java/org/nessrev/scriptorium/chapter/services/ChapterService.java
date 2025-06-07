@@ -6,7 +6,7 @@ import org.nessrev.scriptorium.book.dto.BookInfoDto;
 import org.nessrev.scriptorium.book.models.Book;
 import org.nessrev.scriptorium.book.services.BookService;
 import org.nessrev.scriptorium.chapter.enums.ChapterStates;
-import org.nessrev.scriptorium.chapter.interfaces.ChapterRepository;
+import org.nessrev.scriptorium.chapter.repo.ChapterRepository;
 import org.nessrev.scriptorium.chapter.models.Chapter;
 import org.springframework.stereotype.Service;
 

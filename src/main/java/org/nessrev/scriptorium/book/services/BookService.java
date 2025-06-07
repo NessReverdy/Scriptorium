@@ -3,11 +3,10 @@ package org.nessrev.scriptorium.book.services;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.nessrev.scriptorium.book.dto.BookInfoDto;
-import org.nessrev.scriptorium.book.enums.BookStates;
-import org.nessrev.scriptorium.book.interfaces.BookRepository;
+import org.nessrev.scriptorium.book.repo.BookRepository;
 import org.nessrev.scriptorium.book.mapper.BookMapper;
 import org.nessrev.scriptorium.book.models.Book;
-import org.nessrev.scriptorium.chapter.interfaces.ChapterRepository;
+import org.nessrev.scriptorium.chapter.repo.ChapterRepository;
 import org.nessrev.scriptorium.chapter.models.Chapter;
 import org.nessrev.scriptorium.image.dto.ImageInfoDto;
 import org.nessrev.scriptorium.image.interfaces.ImageService;
@@ -19,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.security.Principal;
-import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -36,7 +34,6 @@ public class BookService {
         ImageInfoDto coverInfo = imageService.save(coverFile);
 
         book.setCoverId(coverInfo.getId());
-        book.setBookStates(Collections.singleton(BookStates.BOOK_PUBLISHED));
 
         UserInfoDto authorInfo = userService.saveAuthor(principal);
         book.setAuthorId(authorInfo.getId());
@@ -74,7 +71,8 @@ public class BookService {
     public boolean editBook(Book book,
                             String name,
                             String description,
-                            @RequestParam("cover") MultipartFile coverFile){
+                            @RequestParam("cover") MultipartFile coverFile,
+                            boolean isPublic){
         if (name != null && !name.trim().isEmpty()) {
             book.setName(name);
         }
@@ -86,7 +84,12 @@ public class BookService {
             ImageInfoDto coverInfo = imageService.save(coverFile);
             book.setCoverId(coverInfo.getId());
         }
+        book.setIsPublic(isPublic);
         bookRepository.save(book);
         return true;
+    }
+
+    public List<Book> getAllPublicBooks(){
+        return bookRepository.findAllPublicBooks();
     }
 }

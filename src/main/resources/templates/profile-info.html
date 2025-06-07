@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title th:text="${user.firstName} + ' ' + ${user.lastName} + ' - Scriptorium'">User Profile - Scriptorium</title>
+    <title th:text="${justUser.firstName} + ' ' + ${justUser.lastName} + ' - Scriptorium'">User Profile - Scriptorium</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" th:href="@{/css/common.css}">
     <link rel="stylesheet" th:href="@{/css/main.css}">
@@ -20,20 +20,20 @@
                         <img th:src="${avatarPath}" alt="User avatar" class="profile-avatar" />
                     </div>
                     <div class="profile-header-info">
-                        <h1 class="profile-name" th:text="${user.firstName} +' '+ ${user.lastName}"></h1>
-                        <div class="profile-role" th:text="${user.roles}"></div>
+                        <h1 class="profile-name" th:text="${justUser.firstName} +' '+ ${justUser.lastName}"></h1>
+                        <div class="profile-role" th:text="${justUser.isWriter} ? 'writer' : 'reader'"></div>
                     </div>
                 </div>
 
                 <div class="profile-info">
                     <div class="info-item">
                         <div class="info-label">Email</div>
-                        <div class="info-value" th:text="${user.email}"></div>
+                        <div class="info-value" th:text="${justUser.email}"></div>
                     </div>
 
                     <div class="info-item">
                         <div class="info-label">About me</div>
-                        <div class="info-value description-text" th:text="${user.description}"></div>
+                        <div class="info-value description-text" th:text="${justUser.description}"></div>
                     </div>
                 </div>
             </div>

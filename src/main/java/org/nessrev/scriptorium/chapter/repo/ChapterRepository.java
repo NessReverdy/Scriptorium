@@ -1,6 +1,5 @@
-package org.nessrev.scriptorium.chapter.interfaces;
+package org.nessrev.scriptorium.chapter.repo;
 
-import org.nessrev.scriptorium.book.models.Book;
 import org.nessrev.scriptorium.chapter.models.Chapter;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

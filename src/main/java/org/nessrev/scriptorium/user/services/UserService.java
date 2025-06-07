@@ -8,8 +8,7 @@ import org.nessrev.scriptorium.image.interfaces.ImageService;
 import org.nessrev.scriptorium.image.interfaces.ImagesRepository;
 import org.nessrev.scriptorium.image.mapper.ImageMapper;
 import org.nessrev.scriptorium.user.dto.UserInfoDto;
-import org.nessrev.scriptorium.user.enums.UserRoles;
-import org.nessrev.scriptorium.user.interfaces.UserRepository;
+import org.nessrev.scriptorium.user.repo.UserRepository;
 import org.nessrev.scriptorium.user.mapper.UserMapper;
 import org.nessrev.scriptorium.user.models.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -19,7 +18,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.security.Principal;
-import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -46,7 +44,6 @@ public class UserService {
         user.setAvatarId(avatarInfo.getId());
 
         user.setActive(true);
-        user.setRoles(Collections.singleton(UserRoles.USER_WRITER));
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         userRepository.save(user);

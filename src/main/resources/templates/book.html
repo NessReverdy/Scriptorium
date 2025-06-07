@@ -104,6 +104,21 @@
                                 <small class="form-text">Recommended size: 800x1200px. Max size: 5MB</small>
                             </div>
                         </div>
+
+                        <div class="form-group mt-3">
+                            <label class="form-label">Visibility:</label>
+                            <div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="isPublic" value="true" th:checked="${book.isPublic}">
+                                    <label class="form-check-label">Public</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="isPublic" value="false" th:checked="${!book.isPublic}">
+                                    <label class="form-check-label">Private</label>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>

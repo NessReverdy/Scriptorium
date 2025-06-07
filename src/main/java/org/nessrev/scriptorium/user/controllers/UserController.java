@@ -4,11 +4,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.nessrev.scriptorium.book.models.Book;
 import org.nessrev.scriptorium.book.services.BookService;
-import org.nessrev.scriptorium.exception.EmailAlreadyExistsException;
-import org.nessrev.scriptorium.image.dto.ImageInfoDto;
-import org.nessrev.scriptorium.image.interfaces.ImagesRepository;
-import org.nessrev.scriptorium.image.mapper.ImageMapper;
-import org.nessrev.scriptorium.user.interfaces.UserRepository;
+import org.nessrev.scriptorium.user.repo.UserRepository;
 import org.nessrev.scriptorium.user.models.User;
 import org.nessrev.scriptorium.user.services.UserHelperService;
 import org.nessrev.scriptorium.user.services.UserService;
@@ -70,6 +66,10 @@ public class UserController {
             return "redirect:/registration?error";
         }
 
+        if (bindingResult.hasErrors()) {
+            return "registration";
+        }
+
         return "redirect:/login";
     }
 
@@ -88,19 +88,20 @@ public class UserController {
 
     @GetMapping("/profile-info/{id}")
     public String profileInfo(@PathVariable("id") Long id, Model model, Principal principal) throws AccessDeniedException {
-        User user = userService.getUserById(id);
+        User justUser = userService.getUserById(id);
         User chekingUser = userHelperService.getUserByPrincipal(principal);
 
-        if(user.getEmail().equals(chekingUser.getEmail())) {
+        if(justUser.getEmail().equals(chekingUser.getEmail())) {
             return "redirect:/my-profile";
         }
 
-        List<Book> books = bookService.getAllBooksById(user.getId());
+        List<Book> books = bookService.getAllBooksById(justUser.getId());
 
+        model.addAttribute("user", chekingUser);
         model.addAttribute("books", books);
-        model.addAttribute("user", user);
-        model.addAttribute("avatarPath", user.getAvatarId() != null
-                ? "/api/images/" + user.getAvatarId()
+        model.addAttribute("justUser", justUser);
+        model.addAttribute("avatarPath", justUser.getAvatarId() != null
+                ? "/api/images/" + justUser.getAvatarId()
                 : "/images/defaultImg.jpg");
         return "profile-info";
     }

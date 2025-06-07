@@ -30,7 +30,7 @@ public class MainController {
     public String mainPage(Principal principal, Model model) throws AccessDeniedException {
         User user = userHelperService.getUserByPrincipal(principal);
 
-        List<Book> books = bookService.getAllBooks();
+        List<Book> books = bookService.getAllPublicBooks();
         Map<Long, UserInfoDto> authorsMap = books.stream()
                 .map(Book::getAuthorId)
                 .distinct()

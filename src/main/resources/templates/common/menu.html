@@ -7,7 +7,7 @@
                 <img th:src="@{/images/miniLogoBlack.png}" alt="Scriptorium Logo" class="logo-img">
             </a>
             <a th:href="@{/main}" class="nav-link main-link">Main</a>
-            <a th:href="@{/createBook}" class="nav-link">Create book</a>
+            <a th:if="${user.isWriter}" th:href="@{/createBook}" class="nav-link">Create book</a>
             <a th:href="@{/my-profile}" class="nav-link">Profile</a>
         </div>
         <form th:action="@{/logout}" method="post" style="margin: 0;">

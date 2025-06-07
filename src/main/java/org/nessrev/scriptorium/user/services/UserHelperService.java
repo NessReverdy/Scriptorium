@@ -1,7 +1,7 @@
 package org.nessrev.scriptorium.user.services;
 
 import lombok.AllArgsConstructor;
-import org.nessrev.scriptorium.user.interfaces.UserRepository;
+import org.nessrev.scriptorium.user.repo.UserRepository;
 import org.nessrev.scriptorium.user.models.User;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
