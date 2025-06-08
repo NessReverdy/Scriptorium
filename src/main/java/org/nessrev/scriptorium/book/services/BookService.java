@@ -86,10 +86,17 @@ public class BookService {
         }
         book.setIsPublic(isPublic);
         bookRepository.save(book);
+        log.info("Book edited successfully");
         return true;
     }
 
     public List<Book> getAllPublicBooks(){
         return bookRepository.findAllPublicBooks();
+    }
+
+    public boolean deleteBooksByUserId(Long userId) {
+        bookRepository.findAllByAuthorId(userId)
+                .forEach(book -> deleteBookById(book.getId()));
+        return true;
     }
 }

@@ -42,4 +42,12 @@ public class User {
     @Column(name = "avatar_id")
     private Long avatarId;
 
+    //todo добавление книг в избранное и отображение избранных книг в акке
+    //todo поисковик книг
+    //todo добавление видимости главам
+
+    //todo
+    //todo
+    //todo
+
 }

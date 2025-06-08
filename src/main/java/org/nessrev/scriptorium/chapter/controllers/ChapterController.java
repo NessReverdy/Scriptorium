@@ -2,6 +2,7 @@ package org.nessrev.scriptorium.chapter.controllers;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.nessrev.scriptorium.book.models.Book;
 import org.nessrev.scriptorium.book.services.BookService;
 import org.nessrev.scriptorium.chapter.models.Chapter;
@@ -21,6 +22,7 @@ import java.security.Principal;
 
 @Controller
 @RequiredArgsConstructor
+@Slf4j
 public class ChapterController {
     private final ChapterService chapterService;
     private final BookService bookService;
@@ -67,7 +69,7 @@ public class ChapterController {
         Chapter chapter = chapterService.getChapterById(id);
         Long bookId = bookService.getBookById(chapter.getBookId()).getId();
         if (!chapterService.deleteChapterById(id)) {
-            throw new RuntimeException("Error in deleting a chapter");
+            log.error("Error in deleting a chapter");
         }
         return "redirect:/book/" + bookId;
     }

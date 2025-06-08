@@ -1,10 +1,11 @@
 package org.nessrev.scriptorium.user.controllers;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.nessrev.scriptorium.book.models.Book;
 import org.nessrev.scriptorium.book.services.BookService;
-import org.nessrev.scriptorium.user.repo.UserRepository;
 import org.nessrev.scriptorium.user.models.User;
 import org.nessrev.scriptorium.user.services.UserHelperService;
 import org.nessrev.scriptorium.user.services.UserService;
@@ -21,11 +22,11 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
+@Slf4j
 public class UserController {
     private final UserService userService;
     private final UserHelperService userHelperService;
     private final BookService bookService;
-    private final UserRepository userRepository;
 
     @GetMapping("/login")
     public String login(Principal principal, Model model) throws AccessDeniedException {
@@ -104,5 +105,38 @@ public class UserController {
                 ? "/api/images/" + justUser.getAvatarId()
                 : "/images/defaultImg.jpg");
         return "profile-info";
+    }
+
+    @PostMapping("/user/edit/{id}")
+    public String editUser(@PathVariable Long id,
+                           @RequestParam(required = false) String firstName,
+                           @RequestParam(required = false) String lastName,
+                           @RequestParam(required = false) String description,
+                           @RequestParam(required = false) String email,
+                           @RequestParam(required = false) MultipartFile avatar,
+                           @RequestParam("isWriter") boolean isWriter,
+                           HttpServletRequest request,
+                           Principal principal) throws AccessDeniedException {
+        User existingUser = userHelperService.getUserByPrincipal(principal);
+        String userEmail = existingUser.getEmail();
+
+        if (!userService.editUser(existingUser, firstName, lastName, description, email, avatar, isWriter)) {
+            log.error("Cannot to edit the user");
+        }
+
+        if (!userEmail.equalsIgnoreCase(existingUser.getEmail())) {
+            request.getSession().invalidate();
+            return "redirect:/logout";
+        }
+        return "redirect:/my-profile";
+    }
+
+    @PostMapping("/user/delete/{id}")
+    public String deleteUser(@PathVariable Long id, HttpServletRequest request){
+        if ((!bookService.deleteBooksByUserId(id)) & (!userService.deleteUser(id))) {
+            log.error("Cannot to delete the user");
+        }
+        request.getSession().invalidate();
+        return "redirect:/logout";
     }
 }

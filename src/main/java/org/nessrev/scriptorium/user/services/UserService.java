@@ -75,4 +75,42 @@ public class UserService {
         }
         return null;
     }
+
+    public boolean editUser(User user,
+                            String firstName,
+                            String lastName,
+                            String description,
+                            String email,
+                            @RequestParam("avatar") MultipartFile avatarFile,
+                            boolean isWriter) {
+        if (firstName != null && !firstName.trim().isEmpty() ) {
+            user.setFirstName(firstName);
+        }
+        if (lastName != null && !lastName.trim().isEmpty() ) {
+            user.setLastName(lastName);
+        }
+        if (description != null && !description.trim().isEmpty() ) {
+            user.setDescription(description);
+        }
+        if (email != null && !email.trim().isEmpty() ) {
+            user.setEmail(email);
+        }
+        if (avatarFile != null && !avatarFile.isEmpty()) {
+            imagesRepository.deleteById(user.getAvatarId());
+            ImageInfoDto avatarInfo = imageService.save(avatarFile);
+            user.setAvatarId(avatarInfo.getId());
+        }
+        user.setIsWriter(isWriter);
+        userRepository.save(user);
+        log.info("User edited successfully");
+        return true;
+    }
+
+    public boolean deleteUser(Long userId) {
+        User user = getUserById(userId);
+        imagesRepository.deleteById(user.getAvatarId());
+        userRepository.delete(user);
+        log.info("User deleted successfully");
+        return true;
+    }
 }

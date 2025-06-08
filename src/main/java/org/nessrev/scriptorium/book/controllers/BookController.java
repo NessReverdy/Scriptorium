@@ -2,6 +2,7 @@ package org.nessrev.scriptorium.book.controllers;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.nessrev.scriptorium.book.models.Book;
 import org.nessrev.scriptorium.book.services.BookService;
 import org.nessrev.scriptorium.chapter.models.Chapter;
@@ -21,6 +22,7 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
+@Slf4j
 public class BookController {
     private final BookService bookService;
     private final UserHelperService userHelperService;
@@ -86,7 +88,7 @@ public class BookController {
     @PostMapping("/book/delete/{id}")
     public String deleteBook(@PathVariable Long id){
         if (!bookService.deleteBookById(id)){
-            throw new RuntimeException("Could not delete book");
+            log.error("Could not delete book");
         }
         return "redirect:/my-profile";
     }
@@ -99,7 +101,7 @@ public class BookController {
                                      @RequestParam("isPublic") boolean isPublic) {
         Book existingBook = bookService.getBookById(id);
         if (!bookService.editBook(existingBook,name, description, coverFile, isPublic)){
-            throw new RuntimeException("Couldn't to edit the book");
+            log.error("Couldn't to edit the book");
         }
         return "redirect:/book/" + id;
     }

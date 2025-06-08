@@ -47,15 +47,16 @@
 }
 
 .profile-role {
-    font-size: 1.1rem;
     color: var(--primary-color);
-    font-weight: 500;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
 }
 
 .profile-info {
     background: rgba(240, 186, 92, 0.1);
     border-radius: 15px;
     padding: 2rem;
+    margin-top: 2rem;
 }
 
 .info-item {
@@ -201,6 +202,35 @@
     height: 20px;
 }
 
+/* Edit Profile Button Styles */
+.edit-profile-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background-color: transparent;
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    border-radius: 6px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.edit-profile-btn:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.edit-profile-btn .edit-icon {
+    width: 16px;
+    height: 16px;
+}
+
+.edit-profile-btn:active {
+    transform: translateY(0);
+}
+
 /* Responsive Styles */
 @media (max-width: 1024px) {
     .profile-layout {
@@ -262,4 +292,115 @@
     .section-title {
         font-size: 1.5rem;
     }
+}
+
+.edit-user-modal {
+    max-width: 800px;
+    margin: 1.75rem auto;
+}
+
+.edit-user-modal .modal-body {
+    padding: 1.5rem;
+}
+
+.edit-user-modal .form-group {
+    margin-bottom: 1.25rem;
+}
+
+.edit-user-modal .form-label {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.edit-user-modal .form-control {
+    padding: 0.75rem;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    transition: border-color 0.3s ease;
+}
+
+.edit-user-modal .form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(240, 186, 92, 0.25);
+}
+
+.edit-user-modal textarea.form-control {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.edit-user-modal .avatar-upload {
+    margin-top: 0.5rem;
+}
+
+.edit-user-modal .form-text {
+    color: #6c757d;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+.delete-profile-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background-color: transparent;
+    color: #dc3545;
+    border: 1px solid #dc3545;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.delete-profile-btn:hover {
+    background-color: #dc3545;
+    color: white;
+}
+
+.delete-profile-btn .delete-icon {
+    width: 16px;
+    height: 16px;
+}
+
+.delete-profile-btn:active {
+    transform: translateY(0);
+}
+
+#deleteProfileModal .warning-text {
+    color: #dc3545;
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+#deleteProfileModal .warning-details {
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+#deleteProfileModal .modal-content {
+    border: none;
+    border-radius: 12px;
+}
+
+#deleteProfileModal .modal-header {
+    border-bottom: 1px solid #dee2e6;
+    padding: 1rem 1.5rem;
+}
+
+#deleteProfileModal .modal-body {
+    padding: 1.5rem;
+}
+
+#deleteProfileModal .modal-footer {
+    border-top: 1px solid #dee2e6;
+    padding: 1rem 1.5rem;
+}
+
+.profile-actions {
+    margin-top: 2rem;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
 } 
