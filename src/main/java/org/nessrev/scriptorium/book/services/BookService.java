@@ -99,4 +99,8 @@ public class BookService {
                 .forEach(book -> deleteBookById(book.getId()));
         return true;
     }
+
+    public List<Book> searchBooksByName(String keyword) {
+        return bookRepository.searchPublicBooksByName(keyword);
+    }
 }

@@ -46,8 +46,4 @@ public class User {
     //todo поисковик книг
     //todo добавление видимости главам
 
-    //todo
-    //todo
-    //todo
-
 }

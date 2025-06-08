@@ -3,6 +3,7 @@ package org.nessrev.scriptorium.book.repo;
 import org.nessrev.scriptorium.book.models.Book;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,7 +13,11 @@ import java.util.List;
 public interface BookRepository extends JpaRepository<Book, Long> {
     @Transactional
     List<Book> findAllByAuthorId(Long id);
+
     @Transactional
     @Query("SELECT book FROM Book book WHERE book.isPublic = true")
     List<Book> findAllPublicBooks();
+
+    @Transactional
+    List<Book> searchPublicBooksByName(@Param("keyword") String keyword);
 }

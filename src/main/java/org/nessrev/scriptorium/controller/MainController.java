@@ -11,6 +11,7 @@ import org.nessrev.scriptorium.user.services.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.nio.file.AccessDeniedException;
 import java.security.Principal;
@@ -27,10 +28,18 @@ public class MainController {
     private final UserService userService;
 
     @GetMapping("/main")
-    public String mainPage(Principal principal, Model model) throws AccessDeniedException {
+    public String mainPage(@RequestParam(value = "keyword", required = false) String keyword,
+                           Principal principal,
+                           Model model) throws AccessDeniedException {
         User user = userHelperService.getUserByPrincipal(principal);
 
-        List<Book> books = bookService.getAllPublicBooks();
+        List<Book> books;
+        if (keyword != null && !keyword.trim().isEmpty()) {
+            books = bookService.searchBooksByName(keyword);
+        } else {
+            books = bookService.getAllPublicBooks();
+        }
+
         Map<Long, UserInfoDto> authorsMap = books.stream()
                 .map(Book::getAuthorId)
                 .distinct()
@@ -42,6 +51,8 @@ public class MainController {
         model.addAttribute("authorsMap", authorsMap);
         model.addAttribute("books", books);
         model.addAttribute("user", user);
+        model.addAttribute("keyword", keyword); // нужно для отображения значения в поисковой строке
         return "main";
     }
+
 }
