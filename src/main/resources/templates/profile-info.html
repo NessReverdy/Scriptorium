@@ -40,11 +40,11 @@
 
             <div class="books-section">
                 <h2 class="section-title">User's Books</h2>
-                <div th:if="${#lists.isEmpty(books)}" class="empty-state">
-                    <p>This user has no books yet.</p>
+                <div th:if="${#lists.isEmpty(books.?[isPublic == true])}" class="empty-state">
+                    <p>This user has no public books yet.</p>
                 </div>
-                <div th:if="${!#lists.isEmpty(books)}" class="books-list">
-                    <div th:each="book : ${books}" class="book-list-item">
+                <div th:if="${!#lists.isEmpty(books.?[isPublic == true])}" class="books-list">
+                    <div th:each="book : ${books.?[isPublic == true]}" class="book-list-item">
                         <a th:href="@{'/book/' + ${book.id}}" class="book-list-link">
                             <img th:src="@{/api/images/{id}(id=${book.coverId})}" alt="Book cover" class="book-list-cover">
                             <div class="book-list-info">

@@ -3,6 +3,8 @@ package org.nessrev.scriptorium.controller;
 import lombok.AllArgsConstructor;
 import org.nessrev.scriptorium.book.models.Book;
 import org.nessrev.scriptorium.book.services.BookService;
+import org.nessrev.scriptorium.elasticSearch.model.BookDocument;
+import org.nessrev.scriptorium.elasticSearch.service.BookSearchService;
 import org.nessrev.scriptorium.user.dto.UserInfoDto;
 import org.nessrev.scriptorium.user.mapper.UserMapper;
 import org.nessrev.scriptorium.user.models.User;
@@ -17,6 +19,7 @@ import java.nio.file.AccessDeniedException;
 import java.security.Principal;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -26,6 +29,7 @@ public class MainController {
     private final UserHelperService userHelperService;
     private final BookService bookService;
     private final UserService userService;
+    private final BookSearchService bookSearchService;
 
     @GetMapping("/main")
     public String mainPage(@RequestParam(value = "keyword", required = false) String keyword,
@@ -35,7 +39,11 @@ public class MainController {
 
         List<Book> books;
         if (keyword != null && !keyword.trim().isEmpty()) {
-            books = bookService.searchBooksByName(keyword);
+            List<BookDocument> bookDocs = bookSearchService.search(keyword);
+            books = bookDocs.stream()
+                    .map(doc -> bookService.getBookById(doc.getId()))
+                    .filter(Objects::nonNull)
+                    .toList();
         } else {
             books = bookService.getAllPublicBooks();
         }
@@ -51,7 +59,7 @@ public class MainController {
         model.addAttribute("authorsMap", authorsMap);
         model.addAttribute("books", books);
         model.addAttribute("user", user);
-        model.addAttribute("keyword", keyword); // нужно для отображения значения в поисковой строке
+        model.addAttribute("keyword", keyword);
         return "main";
     }
 

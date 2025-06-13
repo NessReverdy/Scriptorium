@@ -8,11 +8,13 @@ import org.nessrev.scriptorium.book.mapper.BookMapper;
 import org.nessrev.scriptorium.book.models.Book;
 import org.nessrev.scriptorium.chapter.repo.ChapterRepository;
 import org.nessrev.scriptorium.chapter.models.Chapter;
+import org.nessrev.scriptorium.elasticSearch.service.BookSearchService;
 import org.nessrev.scriptorium.image.dto.ImageInfoDto;
 import org.nessrev.scriptorium.image.interfaces.ImageService;
 import org.nessrev.scriptorium.image.interfaces.ImagesRepository;
 import org.nessrev.scriptorium.user.dto.UserInfoDto;
 import org.nessrev.scriptorium.user.services.UserService;
+import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -29,6 +31,7 @@ public class BookService {
     private final ImageService imageService;
     private final ImagesRepository imagesRepository;
     private final ChapterRepository chapterRepository;
+    private final BookSearchService bookSearchService;
 
     public Boolean createBook(Book book, @RequestParam("cover") MultipartFile coverFile, Principal principal){
         ImageInfoDto coverInfo = imageService.save(coverFile);
@@ -39,6 +42,7 @@ public class BookService {
         book.setAuthorId(authorInfo.getId());
 
         bookRepository.save(book);
+        bookSearchService.indexBook(book);
         return true;
     }
 
@@ -61,6 +65,7 @@ public class BookService {
         imagesRepository.deleteById(book.getCoverId());
         chapterRepository.deleteAllInBatch(chapters);
         bookRepository.deleteById(id);
+        bookSearchService.delete(book);
         return true;
     }
 
@@ -86,6 +91,7 @@ public class BookService {
         }
         book.setIsPublic(isPublic);
         bookRepository.save(book);
+        bookSearchService.indexBook(book);
         log.info("Book edited successfully");
         return true;
     }
@@ -98,9 +104,5 @@ public class BookService {
         bookRepository.findAllByAuthorId(userId)
                 .forEach(book -> deleteBookById(book.getId()));
         return true;
-    }
-
-    public List<Book> searchBooksByName(String keyword) {
-        return bookRepository.searchPublicBooksByName(keyword);
     }
 }

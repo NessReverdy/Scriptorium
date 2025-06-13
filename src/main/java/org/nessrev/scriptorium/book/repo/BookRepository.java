@@ -17,7 +17,4 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     @Transactional
     @Query("SELECT book FROM Book book WHERE book.isPublic = true")
     List<Book> findAllPublicBooks();
-
-    @Transactional
-    List<Book> searchPublicBooksByName(@Param("keyword") String keyword);
 }

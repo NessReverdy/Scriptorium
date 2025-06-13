@@ -77,11 +77,32 @@
     padding: 2rem;
     width: 100%;
     max-width: 1200px;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 2rem;
     margin-left: auto;
     margin-right: auto;
+}
+
+.main-content > div {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 2rem;
+    overflow-x: auto;
+    padding: 1rem 0;
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-color) var(--white-bg);
+}
+
+.main-content > div::-webkit-scrollbar {
+    height: 8px;
+}
+
+.main-content > div::-webkit-scrollbar-track {
+    background: var(--white-bg);
+    border-radius: 4px;
+}
+
+.main-content > div::-webkit-scrollbar-thumb {
+    background-color: var(--primary-color);
+    border-radius: 4px;
 }
 
 .book-card {
@@ -90,8 +111,8 @@
     box-shadow: 0 0 15px var(--shadow-color);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     overflow: hidden;
-    display: flex;
-    flex-direction: column;
+    width: 250px;
+    flex: 0 0 auto;
 }
 
 .book-card:hover {
@@ -158,9 +179,15 @@
     }
 
     .main-content {
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-        gap: 1rem;
         padding: 1rem;
+    }
+
+    .main-content > div {
+        gap: 1rem;
+    }
+
+    .book-card {
+        width: 200px;
     }
 
     .book-cover {
@@ -177,9 +204,12 @@
         font-size: 1rem;
     }
 
-    .main-content {
-        grid-template-columns: 1fr;
-        max-width: 400px;
+    .main-content > div {
+        gap: 0.8rem;
+    }
+
+    .book-card {
+        width: 180px;
     }
 }
 

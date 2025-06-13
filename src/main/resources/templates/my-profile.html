@@ -20,7 +20,7 @@
                 <img th:src="${avatarPath}" alt="User avatar" class="profile-avatar" />
             </div>
                     <div class="profile-header-info">
-                         <h1 class="profile-name" th:text="${user.firstName} +' '+ ${user.lastName}"></h1>
+            <h1 class="profile-name" th:text="${user.firstName} +' '+ ${user.lastName}"></h1>
                         <div class="profile-role" th:text="${user.isWriter} ? 'writer' : 'reader'"></div>
                     </div>
         </div>
@@ -63,6 +63,9 @@
                 </div>
                 <div class="books-list">
                     <div th:each="book : ${books}" class="book-list-item">
+                        <div class="book-visibility" th:classappend="${book.isPublic ? 'public' : 'private'}" 
+                             th:text="${book.isPublic ? 'Public' : 'Private'}">
+                        </div>
                         <a th:href="@{'/book/' + ${book.id}}" class="book-list-link">
                             <img th:src="@{/api/images/{id}(id=${book.coverId})}" alt="Обложка книги" class="book-list-cover">
                             <div class="book-list-info">

@@ -48,7 +48,13 @@
                     </div>
                     <div class="book-header-info">
                         <div class="book-main-info">
-                            <h1 class="book-title-large" th:text="${book.name}"></h1>
+                            <div class="book-title-container">
+                                <h1 class="book-title-large" th:text="${book.name}"></h1>
+                                <div th:if="${isOwner}" class="book-visibility" 
+                                     th:classappend="${book.isPublic ? 'public' : 'private'}" 
+                                     th:text="${book.isPublic ? 'Public' : 'Private'}">
+                                </div>
+                            </div>
                             <a th:href="@{'/profile-info/' + ${author.getId()}}" class="author-link">
                                 <img th:src="${avatar}" alt="user avatar" class="author-avatar">
                                 <span class="author-name" th:text="${author.firstName} + ' ' + ${author.lastName}"></span>

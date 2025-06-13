@@ -94,7 +94,7 @@ public class BookController {
     }
 
     @PostMapping("/book/edit/{id}")
-    public String updateBookFromForm(@PathVariable Long id,
+    public String editBook(@PathVariable Long id,
                                      @RequestParam(required = false) String name,
                                      @RequestParam(required = false) String description,
                                      @RequestParam(required = false) MultipartFile coverFile,
