@@ -269,4 +269,216 @@ textarea.form-control {
     background-color: rgba(108, 117, 125, 0.15);
     color: #6c757d;
     border: 1px solid rgba(108, 117, 125, 0.3);
+}
+
+.chapter-item {
+    margin-bottom: 0.75rem;
+}
+
+.chapter-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    border-radius: 8px;
+    background-color: var(--accent-color);
+    border: 1px solid var(--accent-color);
+    transition: all 0.2s ease;
+}
+
+.chapter-container:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.chapter-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-decoration: none;
+    color: var(--text-color);
+    padding: 0.5rem;
+    border-radius: 6px;
+    background-color: var(--background-color);
+}
+
+.chapter-title {
+    flex: 1;
+    margin-right: 0.5rem;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.chapter-visibility {
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 0.7rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    opacity: 0.85;
+    transition: opacity 0.2s ease;
+}
+
+.chapter-visibility.public {
+    background-color: rgba(40, 167, 69, 0.15);
+    color: #28a745;
+    border: 1px solid rgba(40, 167, 69, 0.3);
+}
+
+.chapter-visibility.private {
+    background-color: rgba(108, 117, 125, 0.15);
+    color: #6c757d;
+    border: 1px solid rgba(108, 117, 125, 0.3);
+}
+
+.chapter-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.chapter-action-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    border: none;
+    background: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.chapter-action-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.chapter-action-btn.edit-btn {
+    color: var(--text-color);
+}
+
+.chapter-action-btn.edit-btn:hover {
+    color: var(--primary-color);
+}
+
+.chapter-action-btn.delete-btn {
+    color: var(--text-color);
+}
+
+.chapter-action-btn.delete-btn:hover {
+    color: #dc3545;
+    background-color: rgba(220, 53, 69, 0.1);
+}
+
+.action-icon {
+    width: 16px;
+    height: 16px;
+}
+
+.edit-chapter-modal {
+    background-color: var(--background-color);
+    border: none;
+    border-radius: 12px;
+}
+
+.edit-chapter-modal .modal-header {
+    border-bottom: 1px solid var(--border-color);
+    padding: 1rem 1.5rem;
+}
+
+.edit-chapter-modal .modal-title {
+    color: var(--text-color);
+    font-weight: 600;
+}
+
+.edit-chapter-modal .modal-body {
+    padding: 1.5rem;
+}
+
+.edit-chapter-modal .form-group {
+    margin-bottom: 1.5rem;
+}
+
+.edit-chapter-modal .form-label {
+    color: var(--text-color);
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.edit-chapter-modal .form-control {
+    background-color: var(--background-color);
+    border: 1px solid var(--border-color);
+    color: var(--text-color);
+    padding: 0.75rem;
+    border-radius: 6px;
+}
+
+.edit-chapter-modal .form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(var(--primary-color-rgb), 0.25);
+}
+
+.edit-chapter-modal .ql-container {
+    height: 300px;
+    background-color: var(--background-color);
+    border: 1px solid var(--border-color);
+    border-radius: 0 0 6px 6px;
+}
+
+.edit-chapter-modal .ql-toolbar {
+    background-color: var(--background-color);
+    border: 1px solid var(--border-color);
+    border-radius: 6px 6px 0 0;
+}
+
+.edit-chapter-modal .ql-editor {
+    color: var(--text-color);
+}
+
+.edit-chapter-modal .form-check-label {
+    color: var(--text-color);
+}
+
+.edit-chapter-modal .modal-footer {
+    border-top: 1px solid var(--border-color);
+    padding: 1rem 1.5rem;
+}
+
+.edit-chapter-modal .btn {
+    padding: 0.5rem 1.5rem;
+    border-radius: 6px;
+    font-weight: 500;
+}
+
+.edit-chapter-modal .btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.edit-chapter-modal .btn-primary:hover {
+    background-color: var(--primary-color-dark);
+    border-color: var(--primary-color-dark);
+}
+
+.edit-chapter-modal .btn-secondary {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+    color: var(--text-color);
+}
+
+.edit-chapter-modal .btn-secondary:hover {
+    background-color: var(--secondary-color-dark);
+    border-color: var(--secondary-color-dark);
+}
+
+.error-message {
+    color: #dc3545;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
 } 

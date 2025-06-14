@@ -8,6 +8,7 @@ import org.nessrev.scriptorium.book.services.BookService;
 import org.nessrev.scriptorium.chapter.enums.ChapterStates;
 import org.nessrev.scriptorium.chapter.repo.ChapterRepository;
 import org.nessrev.scriptorium.chapter.models.Chapter;
+import org.nessrev.scriptorium.image.dto.ImageInfoDto;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -42,6 +43,23 @@ public class ChapterService {
 
     public boolean deleteChapterById(Long id) {
         chapterRepository.deleteById(id);
+        return true;
+    }
+
+    public boolean editChapter(Chapter chapter,
+                               String title,
+                               String description,
+                               boolean isPublicChapter) {
+        if (title != null && !title.trim().isEmpty()) {
+            chapter.setTitle(title);
+        }
+        if (description != null && !description.trim().isEmpty()) {
+            chapter.setDescription(description);
+        }
+
+        chapter.setIsPublicChapter(isPublicChapter);
+        chapterRepository.save(chapter);
+        log.info("Chapter edited successfully");
         return true;
     }
 }

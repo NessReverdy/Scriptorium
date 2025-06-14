@@ -1,6 +1,7 @@
 package org.nessrev.scriptorium.chapter.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 import org.nessrev.scriptorium.chapter.enums.ChapterStates;
@@ -27,4 +28,7 @@ public class Chapter {
 
     @Column(name = "book_id")
     private Long bookId;
+
+    @NotNull(message = "Select the visibility of the chapter: Public or Private")
+    private Boolean isPublicChapter;
 }

@@ -9,6 +9,7 @@
     <link rel="stylesheet" th:href="@{/css/common.css}">
     <link rel="stylesheet" th:href="@{/css/main.css}">
     <link rel="stylesheet" th:href="@{/css/chapter.css}">
+    <link rel="stylesheet" th:href="@{/css/cssForRegAndLog.css}">
 </head>
 <body>
     <div th:replace="~{common/menu :: main-header}"></div>
@@ -28,7 +29,22 @@
                 <div class="form-group">
                     <label class="form-label">Content</label>
                     <div id="quillEditor" class="quill-editor"></div>
-                    <input type="hidden" th:field="*{description}" id="description">
+                    <div id="descriptionError" class="text-danger mt-1" style="display: none;"></div>
+                    <input type="hidden" th:field="*{description}" id="description" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Visibility:</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" th:field="*{isPublicChapter}" th:value="true" id="publicBook">
+                        <label class="form-check-label" for="publicBook">Public</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" th:field="*{isPublicChapter}" th:value="false" id="privateBook">
+                        <label class="form-check-label" for="privateBook">Private</label>
+                    </div>
+
+                    <div id="visibilityError" class="text-danger mt-1" style="display: none;"></div>
                 </div>
 
                 <button type="submit" class="submit-btn">Create Chapter</button>
@@ -55,11 +71,39 @@
             });
 
             const form = document.getElementById('chapterForm');
+            const errorDiv = document.getElementById('descriptionError');
+            const visibilityErrorDiv = document.getElementById('visibilityError');
+
             if (form) {
-                form.onsubmit = function () {
+                form.onsubmit = function (e) {
+                    let valid = true;
+
+                    const text = quill.getText().trim();
                     const html = quill.root.innerHTML;
-                    console.log("📤 Sending description:", html);
                     document.querySelector('#description').value = html;
+
+                    if (text === '') {
+                        errorDiv.textContent = "The 'Content' field must be filled in.";
+                        errorDiv.style.display = 'block';
+                        valid = false;
+                    } else {
+                        errorDiv.style.display = 'none';
+                    }
+
+                    const isPublicSelected = document.querySelector('input[name="isPublicChapter"]:checked');
+                    if (!isPublicSelected) {
+                        visibilityErrorDiv.textContent = "Please select the visibility of the chapter.";
+                        visibilityErrorDiv.style.display = 'block';
+                        valid = false;
+                    } else {
+                        visibilityErrorDiv.style.display = 'none';
+                    }
+
+                    if (!valid) {
+                        e.preventDefault();
+                        return false;
+                    }
+
                     return true;
                 };
             } else {
@@ -68,6 +112,5 @@
         });
     </script>
 
-    </script>
 </body>
 </html>

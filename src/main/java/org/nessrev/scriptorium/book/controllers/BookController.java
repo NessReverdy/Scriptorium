@@ -82,6 +82,8 @@ public class BookController {
                 : "/images/defaultImg.jpg");
         model.addAttribute("isOwner", isOwner);
         model.addAttribute("chapters", chapters);
+        model.addAttribute("visibleChapters", isOwner ? chapters :
+                chapters.stream().filter(Chapter::getIsPublicChapter).toList());
         return "book";
     }
 
