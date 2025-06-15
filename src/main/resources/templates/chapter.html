@@ -21,7 +21,7 @@
         <div class="chapter-layout">
             <div class="sidebar" id="sidebar">
                 <div class="sidebar-header">
-                    <h3 class="book-title" th:text="${book.name}"></h3>
+                    <a th:href="@{'/book/' + ${book.id}}" class="book-title" th:text="${book.name}"></a>
                 </div>
                 <div class="chapters-list">
                     <a th:each="ch : ${visibleChapters}"
@@ -41,13 +41,6 @@
                 <div class="chapter-text-content" th:utext="${chapter.description}"></div>
 
                 <div class="chapter-navigation">
-                    <a th:if="${previousChapter}"
-                       th:href="@{'/chapter/' + ${previousChapter.id}}"
-                       class="nav-link">← Previous Chapter</a>
-                    <a th:href="@{'/book/' + ${book.id}}" class="nav-link">Back to Book</a>
-                    <a th:if="${nextChapter}"
-                       th:href="@{'/chapter/' + ${nextChapter.id}}"
-                       class="nav-link">Next Chapter →</a>
                 </div>
             </div>
         </div>

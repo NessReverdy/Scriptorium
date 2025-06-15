@@ -8,59 +8,103 @@
 
 .sidebar {
     position: fixed;
-    top: 60px;
+    top: 80px;
     left: 0;
     width: 270px;
-    height: calc(100vh - 60px);
-    background-color: #f8f9fa;
+    height: calc(100vh - 80px);
+    background-color: var(--white-bg);
     overflow-y: auto;
     transition: transform 0.3s ease;
     z-index: 1000;
     padding: 20px;
-    border-right: 1px solid #dee2e6;
+    border-right: 1px solid var(--border-color);
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.05);
 }
 
 .sidebar-header {
-    margin-bottom: 20px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #dee2e6;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid var(--bg-secondary);
 }
 
 .book-title {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
+    font-weight: 600;
     margin: 0;
-    color: #333;
+    color: var(--text-color);
+    text-decoration: none;
+    display: block;
+    padding: 5px 0;
+    transition: all 0.2s ease;
+}
+
+.book-title:hover {
+    color: var(--primary-color);
+    transform: translateX(5px);
 }
 
 .chapters-list {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
 }
 
-.chapter-link {
-    padding: 8px 12px;
+a.chapter-link {
+    padding: 10px 15px;
     text-decoration: none;
-    color: #495057;
-    border-radius: 4px;
-    transition: background-color 0.2s;
+    color: black !important;
+    border-radius: 8px;
+    transition: transform 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+    font-size: 1rem;
+    border: 1px solid transparent;
 }
 
-.chapter-link:hover {
-    background-color: #e9ecef;
-    color: #212529;
+a.chapter-link:hover {
+    background-color: var(--bg-secondary);
+    color: var(--primary-color);
+    transform: scale(1.05);
+    border-color: var(--border-color);
 }
 
 .active-chapter {
-    background-color: #e9ecef;
-    color: #212529;
-    font-weight: 500;
+    background-color: var(--bg-secondary);
+    color: var(--primary-color);
+    font-weight: 600;
+    border-color: var(--border-color);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transform: none;
+    text-decoration: none;
+    border-left: 3px solid var(--primary-color);
+    padding-left: 10px;
+}
+
+.active-chapter:hover {
+    transform: none;
+}
+
+/* Стилизация скроллбара */
+.sidebar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+    border-radius: 3px;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 3px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-color);
 }
 
 .toggle-sidebar-btn {
     position: fixed;
     left: 280px;
-    top: 70px;
+    top: 90px;
     z-index: 1100;
     background-color: #ffffff;
     border: 1px solid #dee2e6;
@@ -173,6 +217,13 @@
 .chapter-text-content a {
     color: var(--primary-color);
     text-decoration: none;
+    border-bottom: 1px solid var(--primary-color);
+    transition: all 0.2s ease;
+}
+
+.chapter-text-content a:hover {
+    color: var(--primary-hover);
+    border-bottom-color: var(--primary-hover);
 }
 
 .chapter-text-content img {
