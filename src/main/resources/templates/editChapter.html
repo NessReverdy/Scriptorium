@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Chapter - Scriptorium</title>
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/common.css}">
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+    <link rel="stylesheet" th:href="@{/css/chapter.css}">
+    <link rel="stylesheet" th:href="@{/css/cssForRegAndLog.css}">
+</head>
+<body>
+    <div th:replace="~{common/menu :: main-header}"></div>
+
+    <div class="create-chapter-page">
+        <div class="create-chapter-form">
+            <div class="form-header">
+                <h1 th:text="'Edit Chapter for ' + ${book.name}"></h1>
+            </div>
+
+            <form th:action="@{'/editChapter/' + ${chapter.id}}" method="post" id="chapterForm" th:object="${chapter}">
+                <div class="form-group">
+                    <label class="form-label">Chapter Title</label>
+                    <input type="text" name="description" th:field="*{title}" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Content</label>
+                    <div id="quillEditor" class="quill-editor"></div>
+                    <div id="descriptionError" class="text-danger mt-1" style="display: none;"></div>
+                    <input type="hidden" th:field="*{description}" id="description" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Visibility:</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" th:field="*{isPublicChapter}" th:value="true" id="publicBook">
+                        <label class="form-check-label" for="publicBook">Public</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" th:field="*{isPublicChapter}" th:value="false" id="privateBook">
+                        <label class="form-check-label" for="privateBook">Private</label>
+                    </div>
+
+                    <div id="visibilityError" class="text-danger mt-1" style="display: none;"></div>
+                </div>
+
+                <button type="submit" class="submit-btn">Edit Chapter</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.quilljs.com/1.3.6/quill.min.js"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', function () {
+            const quill = new Quill('#quillEditor', {
+                theme: 'snow',
+                modules: {
+                    toolbar: [
+                        [{ 'header': [1, 2, 3, false] }],
+                        ['bold', 'italic', 'underline', 'strike'],
+                        [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+                        [{ 'align': [] }],
+                        ['link', 'image'],
+                        ['clean']
+                    ]
+                }
+            });
+            const descriptionField = document.getElementById('description');
+            if (descriptionField && descriptionField.value) {
+                quill.root.innerHTML = descriptionField.value;
+            }
+
+            const form = document.getElementById('chapterForm');
+            const errorDiv = document.getElementById('descriptionError');
+            const visibilityErrorDiv = document.getElementById('visibilityError');
+
+            if (form) {
+                form.onsubmit = function (e) {
+                    let valid = true;
+
+                    const text = quill.getText().trim();
+                    const html = quill.root.innerHTML;
+                    document.querySelector('#description').value = html;
+
+                    if (text === '') {
+                        errorDiv.textContent = "The 'Content' field must be filled in.";
+                        errorDiv.style.display = 'block';
+                        valid = false;
+                    } else {
+                        errorDiv.style.display = 'none';
+                    }
+
+                    const isPublicSelected = document.querySelector('input[name="isPublicChapter"]:checked');
+                    if (!isPublicSelected) {
+                        visibilityErrorDiv.textContent = "Please select the visibility of the chapter.";
+                        visibilityErrorDiv.style.display = 'block';
+                        valid = false;
+                    } else {
+                        visibilityErrorDiv.style.display = 'none';
+                    }
+
+                    if (!valid) {
+                        e.preventDefault();
+                        return false;
+                    }
+
+                    return true;
+                };
+            } else {
+                console.warn("⚠️ Form is not found!");
+            }
+        });
+    </script>
+</body>
+</html>

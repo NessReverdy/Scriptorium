@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.nio.file.AccessDeniedException;
 import java.security.Principal;
+import java.util.Comparator;
 import java.util.List;
 
 @Controller
@@ -68,11 +69,12 @@ public class BookController {
         User author = userService.getUserById(book.getAuthorId());
         User currentUser = userHelperService.getUserByPrincipal(principal);
         boolean isOwner = currentUser != null && currentUser.getId().equals(author.getId());
-        List<Chapter> chapters = chapterService.getListOfChaptersByBookId(book.getId());
 
+        List<Chapter> chapters = chapterService.getListOfChaptersByBookId(book.getId());
+        chapters.sort(Comparator.comparing(Chapter::getId));
 
         model.addAttribute("book", book);
-        model.addAttribute("user", userHelperService.getUserByPrincipal(principal));
+        model.addAttribute("user", currentUser);
         model.addAttribute("author", author);
         model.addAttribute("cover", book.getCoverId() != null
                 ? "/api/images/" + book.getCoverId()
@@ -82,10 +84,17 @@ public class BookController {
                 : "/images/defaultImg.jpg");
         model.addAttribute("isOwner", isOwner);
         model.addAttribute("chapters", chapters);
-        model.addAttribute("visibleChapters", isOwner ? chapters :
-                chapters.stream().filter(Chapter::getIsPublicChapter).toList());
+
+        List<Chapter> visibleChapters = isOwner
+                ? chapters
+                : chapters.stream()
+                .filter(Chapter::getIsPublicChapter)
+                .toList();
+        model.addAttribute("visibleChapters", visibleChapters);
+
         return "book";
     }
+
 
     @PostMapping("/book/delete/{id}")
     public String deleteBook(@PathVariable Long id){

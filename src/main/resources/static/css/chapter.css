@@ -1,24 +1,106 @@
 .chapter-page {
-    width: 800px;
-    margin: 5rem auto 2rem;
-    padding: 0 2rem;
+    display: flex;
+    position: relative;
+    min-height: calc(100vh - 60px);
+    width: 100vw;
+    overflow-x: hidden;
+}
+
+.sidebar {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    width: 270px;
+    height: calc(100vh - 60px);
+    background-color: #f8f9fa;
+    overflow-y: auto;
+    transition: transform 0.3s ease;
+    z-index: 1000;
+    padding: 20px;
+    border-right: 1px solid #dee2e6;
+}
+
+.sidebar-header {
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.book-title {
+    font-size: 1.2rem;
+    margin: 0;
+    color: #333;
+}
+
+.chapters-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.chapter-link {
+    padding: 8px 12px;
+    text-decoration: none;
+    color: #495057;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.chapter-link:hover {
+    background-color: #e9ecef;
+    color: #212529;
+}
+
+.active-chapter {
+    background-color: #e9ecef;
+    color: #212529;
+    font-weight: 500;
+}
+
+.toggle-sidebar-btn {
+    position: fixed;
+    left: 280px;
+    top: 70px;
+    z-index: 1100;
+    background-color: #ffffff;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    padding: 6px 10px;
+    cursor: pointer;
+    transition: left 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+
+.toggle-sidebar-btn-hidden {
+    left: 320px;
+}
+
+.toggle-icon {
+    font-size: 1.2rem;
 }
 
 .chapter-container {
-    background: var(--white-bg);
-    border-radius: 12px;
-    padding: 2rem;
-    box-shadow: 0 2px 8px var(--shadow-color);
+    flex: 1;
+    padding: 20px;
+    margin-left: 270px;
+    transition: margin-left 0.3s ease;
+    max-width: 1200px;
+    margin-right: auto;
+}
+
+.sidebar-hidden + .chapter-container {
+    margin-left: 0;
 }
 
 .chapter-header {
-    margin-bottom: 2rem;
     padding-bottom: 1rem;
     border-bottom: 2px solid var(--bg-secondary);
 }
 
 .chapter-title {
     font-size: 2rem;
+    padding-left: 2rem;
     color: var(--text-color);
     margin: 0;
 }
@@ -26,8 +108,10 @@
 .chapter-text-content {
     font-size: 1.1rem;
     line-height: 1.8;
+    padding: 0 2rem;
     color: var(--text-color);
-    max-width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
     display: block;
     user-select: text;
 }
@@ -35,6 +119,21 @@
 .chapter-text-content *,
 .chapter-text-content *:hover {
     background: transparent !important;
+}
+
+.chapter-layout {
+    display: flex;
+    width: 100%;
+    transition: margin-left 0.3s ease;
+}
+
+.sidebar-hidden {
+    transform: translateX(-100%);
+}
+
+
+.sidebar-hidden ~ #chapterContent {
+    margin-left: 0 !important;
 }
 
 /* Стили для контента из редактора Quill */
@@ -57,7 +156,7 @@
 }
 
 .chapter-text-content p {
-    margin: 0 0 1em;
+    margin: 0 0 0em;
     line-height: 1.8;
 }
 
@@ -243,9 +342,44 @@
         max-width: 800px;
         margin: 4.5rem auto 2rem;
     }
+
+    .sidebar {
+        width: 240px;
+    }
+
+    .chapter-container {
+        margin-left: 240px;
+        padding: 15px;
+    }
+
+    .toggle-sidebar-btn {
+        left: 250px;
+    }
+
+    .chapter-text-content {
+        padding: 0 1.5rem;
+    }
+
+        .chapter-page {
+        width: 100%;
+        max-width: 800px;
+    }
 }
 
 @media (max-width: 768px) {
+    .sidebar {
+        width: 220px;
+    }
+
+    .chapter-container {
+        margin-left: 220px;
+        padding: 15px;
+    }
+
+    .toggle-sidebar-btn {
+        left: 230px;
+    }
+
     .create-chapter-page {
         padding: 0 1.5rem;
         margin: 4rem auto 2rem;
@@ -262,9 +396,56 @@
     .ql-container {
         height: 350px !important;
     }
+
+    .chapter-page {
+        padding: 0 1.5rem;
+        margin: 4rem auto 2rem;
+    }
+
+    .chapter-title {
+        font-size: 1.8rem;
+    }
+
+    .chapter-text-content {
+        font-size: 1rem;
+    }
+
+    .chapter-navigation {
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+    }
+
+    .nav-link {
+        width: 100%;
+        text-align: center;
+    }
 }
 
 @media (max-width: 576px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        top: 0;
+        border-right: none;
+        border-bottom: 1px solid #dee2e6;
+    }
+
+    .chapter-container {
+        margin-left: 0;
+        padding: 10px;
+    }
+
+    .toggle-sidebar-btn {
+        left: 10px;
+        top: 65px;
+    }
+
+    .toggle-sidebar-btn-hidden {
+        left: 10px;
+    }
+
     .create-chapter-page {
         padding: 0 1rem;
         margin: 3.5rem auto 2rem;
@@ -290,32 +471,7 @@
         padding: 0.875rem;
         font-size: 1rem;
     }
-}
 
-/* Chapter View Responsive Styles */
-@media (max-width: 992px) {
-    .chapter-page {
-        width: 100%;
-        max-width: 800px;
-    }
-}
-
-@media (max-width: 768px) {
-    .chapter-page {
-        padding: 0 1.5rem;
-        margin: 4rem auto 2rem;
-    }
-
-    .chapter-container {
-        padding: 1.5rem;
-    }
-
-    .chapter-title {
-        font-size: 1.8rem;
-    }
-}
-
-@media (max-width: 576px) {
     .chapter-page {
         padding: 0 1rem;
         margin: 3.5rem auto 2rem;
@@ -323,14 +479,43 @@
 
     .chapter-container {
         padding: 1rem;
+        margin-left: 0;
     }
 
     .chapter-title {
         font-size: 1.5rem;
+        padding-left: 1rem;
     }
 
     .chapter-text-content {
-        font-size: 1rem;
-        line-height: 1.6;
+        font-size: 0.95rem;
+        padding: 0 1rem;
     }
-} 
+
+    .chapter-header {
+        padding-bottom: 0.5rem;
+    }
+
+    .chapter-navigation {
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+    }
+
+    .nav-link {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+@media (max-width: 1400px) {
+    .chapter-container {
+        max-width: 1000px;
+    }
+}
+
+@media (max-width: 1200px) {
+    .chapter-container {
+        max-width: 800px;
+    }
+}
