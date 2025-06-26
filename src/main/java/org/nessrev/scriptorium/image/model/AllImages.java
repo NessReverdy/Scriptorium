@@ -1,4 +1,4 @@
-package org.nessrev.scriptorium.image.models;
+package org.nessrev.scriptorium.image.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;

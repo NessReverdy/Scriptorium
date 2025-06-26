@@ -2,7 +2,7 @@ package org.nessrev.scriptorium.elasticSearch.service;
 
 import co.elastic.clients.elasticsearch.core.SearchResponse;
 import lombok.RequiredArgsConstructor;
-import org.nessrev.scriptorium.book.models.Book;
+import org.nessrev.scriptorium.book.model.Book;
 import org.nessrev.scriptorium.elasticSearch.model.BookDocument;
 import org.springframework.stereotype.Service;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;

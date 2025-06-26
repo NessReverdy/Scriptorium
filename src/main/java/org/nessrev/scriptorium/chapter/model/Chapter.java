@@ -1,13 +1,9 @@
-package org.nessrev.scriptorium.chapter.models;
+package org.nessrev.scriptorium.chapter.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
-import org.nessrev.scriptorium.chapter.enums.ChapterStates;
-
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "chapters")
@@ -23,8 +19,6 @@ public class Chapter {
     @Basic(fetch = FetchType.LAZY)
     @Column(columnDefinition = "TEXT")
     private String description;
-    @ElementCollection(fetch = FetchType.EAGER, targetClass = ChapterStates.class)
-    private Set<ChapterStates> chapterStates = new HashSet<>();
 
     @Column(name = "book_id")
     private Long bookId;

@@ -1,7 +1,7 @@
 package org.nessrev.scriptorium.user.mapper;
 
 import org.nessrev.scriptorium.user.dto.UserInfoDto;
-import org.nessrev.scriptorium.user.models.User;
+import org.nessrev.scriptorium.user.model.User;
 
 public class UserMapper {
     public static UserInfoDto toUserDto(User user) {

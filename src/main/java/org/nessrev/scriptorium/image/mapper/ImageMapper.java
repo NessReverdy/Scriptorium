@@ -2,7 +2,7 @@ package org.nessrev.scriptorium.image.mapper;
 
 import lombok.AllArgsConstructor;
 import org.nessrev.scriptorium.image.dto.ImageInfoDto;
-import org.nessrev.scriptorium.image.models.AllImages;
+import org.nessrev.scriptorium.image.model.AllImages;
 
 @AllArgsConstructor
 public class ImageMapper {

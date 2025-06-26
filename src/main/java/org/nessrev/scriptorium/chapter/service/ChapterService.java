@@ -1,17 +1,15 @@
-package org.nessrev.scriptorium.chapter.services;
+package org.nessrev.scriptorium.chapter.service;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.nessrev.scriptorium.book.dto.BookInfoDto;
-import org.nessrev.scriptorium.book.models.Book;
-import org.nessrev.scriptorium.book.services.BookService;
-import org.nessrev.scriptorium.chapter.enums.ChapterStates;
+import org.nessrev.scriptorium.book.model.Book;
+import org.nessrev.scriptorium.book.service.BookService;
 import org.nessrev.scriptorium.chapter.repo.ChapterRepository;
-import org.nessrev.scriptorium.chapter.models.Chapter;
-import org.nessrev.scriptorium.image.dto.ImageInfoDto;
+import org.nessrev.scriptorium.chapter.model.Chapter;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -21,11 +19,10 @@ public class ChapterService {
     private final BookService bookService;
     private final ChapterRepository chapterRepository;
 
-
+    @Transactional
     public Chapter createChapter(Chapter chapter, Book book){
         chapter.setId(null);
 
-        chapter.setChapterStates(Collections.singleton(ChapterStates.CHAPTER_PUBLISHED));
         BookInfoDto bookInfo = bookService.saveBook(book);
 
         chapter.setBookId(bookInfo.getId());

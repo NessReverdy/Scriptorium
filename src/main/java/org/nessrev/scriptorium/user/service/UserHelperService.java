@@ -1,8 +1,8 @@
-package org.nessrev.scriptorium.user.services;
+package org.nessrev.scriptorium.user.service;
 
 import lombok.AllArgsConstructor;
 import org.nessrev.scriptorium.user.repo.UserRepository;
-import org.nessrev.scriptorium.user.models.User;
+import org.nessrev.scriptorium.user.model.User;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

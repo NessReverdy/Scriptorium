@@ -1,6 +1,6 @@
 package org.nessrev.scriptorium.user.repo;
 
-import org.nessrev.scriptorium.user.models.User;
+import org.nessrev.scriptorium.user.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

@@ -1,7 +1,7 @@
 package org.nessrev.scriptorium.book.mapper;
 
 import org.nessrev.scriptorium.book.dto.BookInfoDto;
-import org.nessrev.scriptorium.book.models.Book;
+import org.nessrev.scriptorium.book.model.Book;
 
 public class BookMapper {
     public static BookInfoDto toBookDto(Book book) {

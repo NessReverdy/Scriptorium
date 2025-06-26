@@ -1,8 +1,8 @@
-package org.nessrev.scriptorium.image.controllers;
+package org.nessrev.scriptorium.image.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.nessrev.scriptorium.image.interfaces.ImagesRepository;
-import org.nessrev.scriptorium.image.models.AllImages;
+import org.nessrev.scriptorium.image.repo.ImagesRepository;
+import org.nessrev.scriptorium.image.model.AllImages;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

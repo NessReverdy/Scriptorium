@@ -1,6 +1,6 @@
-package org.nessrev.scriptorium.image.interfaces;
+package org.nessrev.scriptorium.image.repo;
 
-import org.nessrev.scriptorium.image.models.AllImages;
+import org.nessrev.scriptorium.image.model.AllImages;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

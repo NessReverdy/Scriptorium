@@ -1,4 +1,4 @@
-package org.nessrev.scriptorium.book.models;
+package org.nessrev.scriptorium.book.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;

@@ -1,15 +1,15 @@
 package org.nessrev.scriptorium.controller;
 
 import lombok.AllArgsConstructor;
-import org.nessrev.scriptorium.book.models.Book;
-import org.nessrev.scriptorium.book.services.BookService;
+import org.nessrev.scriptorium.book.model.Book;
+import org.nessrev.scriptorium.book.service.BookService;
 import org.nessrev.scriptorium.elasticSearch.model.BookDocument;
 import org.nessrev.scriptorium.elasticSearch.service.BookSearchService;
 import org.nessrev.scriptorium.user.dto.UserInfoDto;
 import org.nessrev.scriptorium.user.mapper.UserMapper;
-import org.nessrev.scriptorium.user.models.User;
-import org.nessrev.scriptorium.user.services.UserHelperService;
-import org.nessrev.scriptorium.user.services.UserService;
+import org.nessrev.scriptorium.user.model.User;
+import org.nessrev.scriptorium.user.service.UserHelperService;
+import org.nessrev.scriptorium.user.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

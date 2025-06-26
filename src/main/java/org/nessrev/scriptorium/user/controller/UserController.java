@@ -1,14 +1,14 @@
-package org.nessrev.scriptorium.user.controllers;
+package org.nessrev.scriptorium.user.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.nessrev.scriptorium.book.models.Book;
-import org.nessrev.scriptorium.book.services.BookService;
-import org.nessrev.scriptorium.user.models.User;
-import org.nessrev.scriptorium.user.services.UserHelperService;
-import org.nessrev.scriptorium.user.services.UserService;
+import org.nessrev.scriptorium.book.model.Book;
+import org.nessrev.scriptorium.book.service.BookService;
+import org.nessrev.scriptorium.user.model.User;
+import org.nessrev.scriptorium.user.service.UserHelperService;
+import org.nessrev.scriptorium.user.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;

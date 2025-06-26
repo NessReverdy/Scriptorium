@@ -1,16 +1,16 @@
-package org.nessrev.scriptorium.user.services;
+package org.nessrev.scriptorium.user.service;
 
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.nessrev.scriptorium.image.dto.ImageInfoDto;
-import org.nessrev.scriptorium.image.interfaces.ImageService;
-import org.nessrev.scriptorium.image.interfaces.ImagesRepository;
+import org.nessrev.scriptorium.image.service.ImageService;
+import org.nessrev.scriptorium.image.repo.ImagesRepository;
 import org.nessrev.scriptorium.image.mapper.ImageMapper;
 import org.nessrev.scriptorium.user.dto.UserInfoDto;
 import org.nessrev.scriptorium.user.repo.UserRepository;
 import org.nessrev.scriptorium.user.mapper.UserMapper;
-import org.nessrev.scriptorium.user.models.User;
+import org.nessrev.scriptorium.user.model.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
